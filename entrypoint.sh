@@ -6,13 +6,7 @@ set -x
 if [ -z "$INPUT_SOURCE_FOLDER" ]
 then
   echo "Source folder must be defined"
-  return -1
-fi
-
-if [ $INPUT_DESTINATION_HEAD_BRANCH == "main" ] || [ $INPUT_DESTINATION_HEAD_BRANCH == "master"]
-then
-  echo "Destination head branch cannot be 'main' nor 'master'"
-  return -1
+  return 0
 fi
 
 if [ -z "$INPUT_PULL_REQUEST_REVIEWERS" ]
