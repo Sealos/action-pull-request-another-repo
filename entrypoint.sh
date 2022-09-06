@@ -28,7 +28,17 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 
 echo "Copying contents to git repo"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
-cp $INPUT_FILE_FILTER -r $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+
+if [ -n "$INPUT_FILE_FILTER" ]
+then
+  INCLUDE_OPTIONS="--include='$INPUT_FILE_FILTER' --include='*/'"
+else
+  INCLUDE_OPTIONS="--include='*/'"
+fi
+
+SYNC="rsync -am $INCLUDE_OPTIONS --exclude='*' $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/""
+eval $SYNC
+
 cd "$CLONE_DIR"
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 
