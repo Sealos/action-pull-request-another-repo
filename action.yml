@@ -7,6 +7,9 @@ inputs:
   destination_repo:
     description: 'Destination repository'
     required: true
+  file_filter:
+    description: 'File filter'
+    required: false
   destination_folder:
     description: 'Destination folder to push the origin folder'
     required: false
@@ -32,6 +35,7 @@ runs:
   args:
     - ${{ inputs.source-folder }}
     - ${{ inputs.destination-repo }}
+    - ${{ inputs.file-filter }}
     - ${{ inputs.destination-folder }}
     - ${{ inputs.user-email }}
     - ${{ inputs.user-name }}
